@@ -7,12 +7,11 @@ def get_pull_request_diff(repo_full_name: str, pr_number: int) -> str:
 
     headers = {
         "Authorization": f"Bearer {GITHUB_TOKEN}",
-        "Accept": "application/vnd.github.v3.diff"
+        "Accept": "application/vnd.github.v3.diff",
     }
 
     response = requests.get(url, headers=headers)
     response.raise_for_status()
-
     return response.text
 
 
@@ -21,14 +20,13 @@ def post_comment_to_pr(repo_full_name: str, pr_number: int, comment: str):
 
     headers = {
         "Authorization": f"Bearer {GITHUB_TOKEN}",
-        "Accept": "application/vnd.github+json"
+        "Accept": "application/vnd.github+json",
     }
 
     payload = {
-        "body": f"## AI Code Review\n\n{comment}"
+        "body": f"## 🤖 AI Code Review\n\n{comment}"
     }
 
     response = requests.post(url, json=payload, headers=headers)
     response.raise_for_status()
-
     return response.json()
